@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>5 Minute Countdown</title>
+  <title>10 Second Countdown</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -20,6 +20,7 @@
     progress {
       width: 60%;
       height: 25px;
+      accent-color: #38bdf8; /* optional visual upgrade */
     }
 
     #popup {
@@ -38,13 +39,13 @@
 </head>
 <body>
 
-  <h1>⏳ 5 Minute Countdown ⏳</h1>
+  <h1>⏳ 10 Second Countdown ⏳</h1>
 
   <!-- Timer Bar -->
-  <progress id="timerBar" value="300" max="300"></progress>
+  <progress id="timerBar" value="0" max="10"></progress>
 
   <!-- Time Text -->
-  <div id="countdown">05:00</div>
+  <div id="countdown">00:10</div>
 
   <!-- Popup -->
   <div id="popup">
@@ -53,7 +54,7 @@
   </div>
 
   <script>
-    const TOTAL_TIME = 5 * 60; // 300 seconds
+    const TOTAL_TIME = 10; // 10 seconds
     let timeLeft = TOTAL_TIME;
 
     const countdownEl = document.getElementById("countdown");
@@ -75,7 +76,9 @@
       countdownEl.textContent =
         `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 
-      timerBar.value = timeLeft;
+      // Fill the progress bar as time passes
+      timerBar.value = TOTAL_TIME - timeLeft;
+
       timeLeft--;
     }
 
@@ -85,6 +88,3 @@
 
 </body>
 </html>
-
-      const minutes = Math.floor(timeLeft / 60);
-      const seconds = timeLeft % 60;
