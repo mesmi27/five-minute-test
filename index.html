@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>5 Minute Countdown</title>
-
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -11,10 +10,6 @@
       background: #0f172a;
       color: white;
       padding-top: 100px;
-    }
-
-    h1 {
-      margin-bottom: 30px;
     }
 
     #countdown {
@@ -25,7 +20,6 @@
     progress {
       width: 60%;
       height: 25px;
-      accent-color: #38bdf8; /* visual upgrade */
     }
 
     #popup {
@@ -39,11 +33,6 @@
     a {
       color: #38bdf8;
       font-size: 1.2rem;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
     }
   </style>
 </head>
@@ -52,7 +41,7 @@
   <h1>⏳ 5 Minute Countdown ⏳</h1>
 
   <!-- Timer Bar -->
-  <progress id="timerBar" value="0" max="300"></progress>
+  <progress id="timerBar" value="300" max="300"></progress>
 
   <!-- Time Text -->
   <div id="countdown">05:00</div>
@@ -60,11 +49,7 @@
   <!-- Popup -->
   <div id="popup">
     <h2>⏰ Time’s up!</h2>
-    <p>
-      <a href="https://drive.google.com/drive/folders/1SAsP96d-rNZXWHZFetvHzqYsyATeU6VV?usp=drive_link" target="_blank">
-        Click here
-      </a>
-    </p>
+    <a href="https://drive.google.com/drive/folders/1SAsP96d-rNZXWHZFetvHzqYsyATeU6VV?usp=drive_link" target="_blank">Click here 🚀</a>
   </div>
 
   <script>
@@ -83,6 +68,23 @@
         clearInterval(timer);
         return;
       }
+
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+
+      countdownEl.textContent =
+        `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+
+      timerBar.value = timeLeft;
+      timeLeft--;
+    }
+
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+  </script>
+
+</body>
+</html>
 
       const minutes = Math.floor(timeLeft / 60);
       const seconds = timeLeft % 60;
