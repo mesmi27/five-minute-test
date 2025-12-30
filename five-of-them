@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>5 Minute Countdown</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #0f172a;
+      color: white;
+      padding-top: 100px;
+    }
+
+    #countdown {
+      font-size: 3rem;
+      margin-bottom: 30px;
+    }
+
+    #popup {
+      display: none;
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 10px;
+    }
+
+    a {
+      color: #38bdf8;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>⏳ 5 Minute Countdown ⏳</h1>
+  <div id="countdown">05:00</div>
+
+  <div id="popup">
+    <h2>⏰ Time’s up!</h2>
+    <p>
+      <a href="https://drive.google.com/drive/folders/1SAsP96d-rNZXWHZFetvHzqYsyATeU6VV?usp=drive_link" target="_blank">
+        Click here 🚀
+      </a>
+    </p>
+  </div>
+
+  <script>
+    // Set countdown length (5 minutes = 300 seconds)
+    let timeLeft = 5 * 60;
+
+    const countdownEl = document.getElementById("countdown");
+    const popupEl = document.getElementById("popup");
+
+    function updateCountdown() {
+      if (timeLeft <= 0) {
+        countdownEl.style.display = "none";
+        popupEl.style.display = "block";
+        clearInterval(timer);
+        return;
+      }
+
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+
+      countdownEl.textContent =
+        `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+
+      timeLeft--;
+    }
+
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+  </script>
+
+</body>
+</html>
