@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>10 Second Countdown</title>
+  <title>K-Files Countdown (Central Time)</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,13 +14,7 @@
 
     #countdown {
       font-size: 3rem;
-      margin: 20px 0;
-    }
-
-    progress {
-      width: 60%;
-      height: 25px;
-      accent-color: #38bdf8; /* optional visual upgrade */
+      margin-bottom: 30px;
     }
 
     #popup {
@@ -28,7 +22,6 @@
       background: #1e293b;
       padding: 30px;
       border-radius: 10px;
-      margin-top: 30px;
     }
 
     a {
@@ -39,47 +32,57 @@
 </head>
 <body>
 
-  <h1>⏳ 10 Second Countdown ⏳</h1>
+  <h1> Countdown to K-Files (Central Time) </h1>
+  <div id="countdown">Loading...</div>
 
-  <!-- Timer Bar -->
-  <progress id="timerBar" value="0" max="10"></progress>
-
-  <!-- Time Text -->
-  <div id="countdown">00:10</div>
-
-  <!-- Popup -->
   <div id="popup">
-    <h2>⏰ Time’s up!</h2>
-    <a href="https://drive.google.com/drive/folders/1SAsP96d-rNZXWHZFetvHzqYsyATeU6VV?usp=drive_link" target="_blank">Click here 🚀</a>
+    <h2> 🎉 Time’s up! 🎉 </h2>
+    <p>
+      <a href="https://drive.google.com/drive/folders/1SAsP96d-rNZXWHZFetvHzqYsyATeU6VV?usp=drive_link" target="_blank">
+        Click here for the files.
+      </a>
+    </p>
   </div>
 
   <script>
-    const TOTAL_TIME = 10; // 10 seconds
-    let timeLeft = TOTAL_TIME;
+    function getCentralTimeNow() {
+      // Get current time in Central Time using Intl
+      const now = new Date();
+      const centralTimeString = now.toLocaleString("en-US", {
+        timeZone: "America/Chicago"
+      });
+      return new Date(centralTimeString);
+    }
 
+    // Set countdown target to Dec 30 of this year at 15:13 (3:13 PM) Central Time
+    function getTargetTimeCT() {
+      const nowCT = getCentralTimeNow();
+      const year = nowCT.getFullYear();
+      // month is 0-based: 11 = December, 30th day
+      return new Date(`December 30, ${year} 15:13:00 GMT-0600`);
+    }
+
+    const targetTime = getTargetTimeCT();
     const countdownEl = document.getElementById("countdown");
     const popupEl = document.getElementById("popup");
-    const timerBar = document.getElementById("timerBar");
 
     function updateCountdown() {
-      if (timeLeft <= 0) {
+      const nowCT = getCentralTimeNow();
+      const diff = targetTime - nowCT;
+
+      if (diff <= 0) {
         countdownEl.style.display = "none";
-        timerBar.style.display = "none";
         popupEl.style.display = "block";
         clearInterval(timer);
         return;
       }
 
-      const minutes = Math.floor(timeLeft / 60);
-      const seconds = timeLeft % 60;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
 
-      countdownEl.textContent =
-        `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-
-      // Fill the progress bar as time passes
-      timerBar.value = TOTAL_TIME - timeLeft;
-
-      timeLeft--;
+      countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }
 
     updateCountdown();
