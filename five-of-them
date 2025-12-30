@@ -38,7 +38,7 @@
 </head>
 <body>
 
-  <h1>⏳ 5 Minute Countdown ⏳</h1>
+  <h1> 5 Minute Countdown </h1>
 
   <!-- Timer Bar -->
   <progress id="timerBar" value="300" max="300"></progress>
@@ -48,8 +48,8 @@
 
   <!-- Popup -->
   <div id="popup">
-    <h2>⏰ Time’s up!</h2>
-    <a href="https://drive.google.com/drive/folders/1SAsP96d-rNZXWHZFetvHzqYsyATeU6VV?usp=drive_link" target="_blank">Click here 🚀</a>
+    <h2> Time’s up!</h2>
+    <a href="https://drive.google.com/drive/folders/1SAsP96d-rNZXWHZFetvHzqYsyATeU6VV?usp=drive_link" target="_blank">Click here</a>
   </div>
 
   <script>
